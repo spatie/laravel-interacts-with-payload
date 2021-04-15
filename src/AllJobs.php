@@ -10,10 +10,10 @@ class AllJobs
 
     protected array $casts = [];
 
-    public function add(array|string $name, Closure $closure): self
+    public function add(array | string $name, Closure $closure): self
     {
         if (is_array($name)) {
-            foreach($name as $nameInArray => $closureInArray) {
+            foreach ($name as $nameInArray => $closureInArray) {
                 $this->add($nameInArray, $closureInArray);
             }
 
@@ -39,8 +39,7 @@ class AllJobs
 
     public function addAllToPayloadData(array $payloadData): array
     {
-        foreach($this->addToPayload as $addToPayloadName => $addToPayloadClosure)
-        {
+        foreach ($this->addToPayload as $addToPayloadName => $addToPayloadClosure) {
             if (! isset($jobData[$addToPayloadName])) {
                 $payloadData = array_merge($payloadData, array_filter([
                     $addToPayloadName => $addToPayloadClosure(),
