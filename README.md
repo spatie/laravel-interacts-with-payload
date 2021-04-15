@@ -10,7 +10,7 @@ This package makes it easy to inject things in every job.
 Imagine that you want to have the user who initiated the queued of a job available in every queued job. This is how you would implement that using this package
 
 ```php
-use Spatie\InteractsWithPayload\Facades;
+use Spatie\InteractsWithPayload\Facades\AllJobs;
 
 AllJobs::add('user', fn() => auth()->user())
 ```
@@ -33,7 +33,6 @@ class YourJob implements ShouldQueue
 }
 ```
 
-
 ## Support us
 
 [<img src="https://github-ads.s3.eu-central-1.amazonaws.com/package-laravel_interacts_with_payload-laravel.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/package-laravel_interacts_with_payload-laravel)
@@ -47,34 +46,67 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require spatie/laravel_interacts_with_payload
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --provider="Spatie\InteractsWithPayload\LaravelInteractsWithPayloadServiceProvider" --tag="laravel_interacts_with_payload-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-```bash
-php artisan vendor:publish --provider="Spatie\InteractsWithPayload\LaravelInteractsWithPayloadServiceProvider" --tag="laravel_interacts_with_payload-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
+composer require spatie/laravel-interacts-with-payload
 ```
 
 ## Usage
 
+To add a value to all jobs call the `add` method on the `AllJobs` facade with a name and a closure that returns the value.
+
 ```php
-$laravel_interacts_with_payload = new Spatie\InteractsWithPayload();
-echo $laravel_interacts_with_payload->echoPhrase('Hello, Spatie!');
+use Spatie\InteractsWithPayload\Facades\AllJobs;
+
+AllJobs::add('extraValue', fn() => 'My extra value')
 ```
+
+To retrieve the user in your queued job you can call `getFromPayload` which is available through the `InteractsWithPayload` trait.
+
+```php
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Spatie\InteractsWithPayload\Concerns\InteractsWithPayload;
+
+class YourJob implements ShouldQueue
+{
+    use InteractsWithPayload;  
+    
+    public function handle()
+    {
+        // will contain "My extra value"
+        $value = $this->getFromPayload('extraValue');
+    }  
+}
+```
+
+### Using models
+
+It is safe to let the closure you pass to `add` return an Eloquent model. 
+
+```php
+use Spatie\InteractsWithPayload\Facades\AllJobs;
+
+AllJobs::add('user', fn() => auth()->user())
+```
+
+You can retrieve the model with `getFromPayload`
+
+```php
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Spatie\InteractsWithPayload\Concerns\InteractsWithPayload;
+
+class YourJob implements ShouldQueue
+{
+    use InteractsWithPayload;  
+    
+    public function handle()
+    {
+        // instance of User model or `null` if the user has been deleted in the meantime
+        $user = $this->getFromPayload('user');
+    }  
+}
+```
+
+
+
 
 ## Testing
 
