@@ -12,11 +12,11 @@ class AllJobsTest extends TestCase
     /** @test */
     public function it_can_inject_a_value_in_all_jobs()
     {
-        self::$executeInJob = function(TestJob $job) {
+        self::$executeInJob = function (TestJob $job) {
             $this->valueFromInsideJob = $job->getFromPayload('extra');
         };
 
-        AllJobs::add('extra', fn() => 'extraValue');
+        AllJobs::add('extra', fn () => 'extraValue');
 
         dispatch(new TestJob());
 
