@@ -9,7 +9,7 @@ class AllJobs
 {
     protected array $addToPayload = [];
 
-    public function add(array | string $name, Closure | null $closure = null): self
+    public function add(array | string $name, ?Closure $closure = null): self
     {
         if (is_array($name)) {
             foreach ($name as $nameInArray => $closureInArray) {
