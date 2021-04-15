@@ -67,4 +67,28 @@ class AllJobsTest extends TestCase
         $this->assertIsArray($this->valueFromInsideJob);
         $this->assertEquals(1, $this->valueFromInsideJob['a']);
     }
+
+    /** @test */
+    public function multiple_things_can_be_added_to_a_job_in_one_go()
+    {
+        $myModel = TestModel::create(['name' => 'my model name']);
+
+        AllJobs::add([
+            'extra' => fn() => 'extra value',
+            'model' => fn() => $myModel,
+        ]);
+
+        self::$executeInJob = function (TestJob $job) {
+            $this->valueFromInsideJob = [
+                'extra' => $job->getFromPayload('extra'),
+                'model' => $job->getFromPayload('model'),
+            ];
+        };
+
+        dispatch(new TestJob());
+
+        $this->assertEquals('extra value', $this->valueFromInsideJob['extra']);
+        $this->assertEquals('my model name', $this->valueFromInsideJob['model']->name);
+
+    }
 }
