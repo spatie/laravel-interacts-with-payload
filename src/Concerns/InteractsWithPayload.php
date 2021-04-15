@@ -11,23 +11,24 @@ trait InteractsWithPayload
     {
         $payload = $this->job->payload();
 
-        $value = $payload['data'][$name] ?? null;
+        $valueAndType = $payload['data'][$name] ?? null;
 
-        $this->castPayloadValue($name, $value);
+        if (is_null($valueAndType)) {
+            return null;
+        }
 
-        return $value;
+        return $this->castPayloadValue($name, $valueAndType);
     }
 
-    protected function castPayloadValue(string $name, mixed $value)
+    protected function castPayloadValue(string $name, array $valueAndType)
     {
-        if (! $castToClass = AllJobs::getCast($name)) {
-            return $value;
+        $value = $valueAndType['value'];
+        $type = $valueAndType['type'];
+
+        if (is_subclass_of($type, Model::class)) {
+            return $type::find($value);
         }
 
-        if (is_subclass_of($castToClass, Model::class)) {
-            return $castToClass::find($value);
-        }
-
-        return new $castToClass($value);
+        return $value;
     }
 }

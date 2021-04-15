@@ -3,14 +3,13 @@
 namespace Spatie\InteractsWithPayload;
 
 use Closure;
+use Illuminate\Database\Eloquent\Model;
 
 class AllJobs
 {
     protected array $addToPayload = [];
 
-    protected array $casts = [];
-
-    public function add(array | string $name, Closure $closure): self
+    public function add(array|string $name, Closure $closure): self
     {
         if (is_array($name)) {
             foreach ($name as $nameInArray => $closureInArray) {
@@ -25,28 +24,34 @@ class AllJobs
         return $this;
     }
 
-    public function cast(string $name, string $className): self
-    {
-        $this->casts[$name] = $className;
-
-        return $this;
-    }
-
-    public function getCast($name): ?string
-    {
-        return $this->casts[$name] ?? null;
-    }
-
     public function addAllToPayloadData(array $payloadData): array
     {
         foreach ($this->addToPayload as $addToPayloadName => $addToPayloadClosure) {
-            if (! isset($jobData[$addToPayloadName])) {
-                $payloadData = array_merge($payloadData, array_filter([
-                    $addToPayloadName => $addToPayloadClosure(),
-                ]));
+            if (isset($jobData[$addToPayloadName])) {
+                continue;
             }
+
+            $rawValue = $addToPayloadClosure();
+
+            $preparedValue = $this->getPreparedValueForPayload($addToPayloadName, $rawValue);
+
+            $payloadData = array_merge($payloadData, array_filter([
+
+                $addToPayloadName => $preparedValue,
+            ]));
         }
 
         return $payloadData;
+    }
+
+    protected function getPreparedValueForPayload(string $name, mixed $rawValue): array
+    {
+        if ($rawValue instanceof Model) {
+            return ['value' => $rawValue->id, 'type' => get_class($rawValue)];
+        }
+
+        return [
+            'value' => $rawValue, 'type' => '',
+        ];
     }
 }
