@@ -1,26 +1,29 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Spatie\InteractsWithPayload\Tests;
 
+use Closure;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use Spatie\InteractsWithPayload\InteractsWithPayloadServiceProvider;
 
 class TestCase extends Orchestra
 {
+    public static Closure $executeInJob;
+
     public function setUp(): void
     {
-        parent::setUp();
+        self::$executeInJob = fn() => null;
 
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Spatie\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+        parent::setUp();
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            InteractsWithPayloadServiceProvider::class,
         ];
     }
 
@@ -33,9 +36,10 @@ class TestCase extends Orchestra
             'prefix' => '',
         ]);
 
-        /*
-        include_once __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
+        Schema::create('test_models', function(Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
     }
 }
