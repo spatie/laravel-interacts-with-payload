@@ -1,5 +1,5 @@
 {
-    "name": "spatie/interacts-with-payload",
+    "name": "spatie/laravel-interacts-with-payload",
     "description": "Add variables to the payloads of all jobs in a Laravel app",
     "keywords": [
         "Spatie",
