@@ -133,6 +133,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
+This package is inspired by [this awesome blogpost](https://james.brooks.page/blog/injecting-additional-data-into-laravel-queued-jobs/) by [James Brooks](https://twitter.com/jbrooksuk). Thank you James for also having helped hunting down that queueing bug in Laravel 👍
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
