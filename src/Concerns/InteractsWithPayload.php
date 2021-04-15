@@ -3,7 +3,6 @@
 namespace Spatie\InteractsWithPayload\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\InteractsWithPayload\Facades\AllJobs;
 
 trait InteractsWithPayload
 {
