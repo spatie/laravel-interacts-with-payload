@@ -2,6 +2,7 @@
 
 namespace Spatie\InteractsWithPayload;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Queue;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
