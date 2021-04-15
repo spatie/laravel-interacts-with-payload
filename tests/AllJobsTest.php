@@ -74,8 +74,8 @@ class AllJobsTest extends TestCase
         $myModel = TestModel::create(['name' => 'my model name']);
 
         AllJobs::add([
-            'extra' => fn() => 'extra value',
-            'model' => fn() => $myModel,
+            'extra' => fn () => 'extra value',
+            'model' => fn () => $myModel,
         ]);
 
         self::$executeInJob = function (TestJob $job) {
@@ -89,6 +89,5 @@ class AllJobsTest extends TestCase
 
         $this->assertEquals('extra value', $this->valueFromInsideJob['extra']);
         $this->assertEquals('my model name', $this->valueFromInsideJob['model']->name);
-
     }
 }
