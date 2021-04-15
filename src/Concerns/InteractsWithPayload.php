@@ -21,8 +21,7 @@ trait InteractsWithPayload
 
     protected function castPayloadValue(string $name, array $valueAndType)
     {
-        $value = $valueAndType['value'];
-        $type = $valueAndType['type'];
+        ['value' => $value, 'type' => $type] = $valueAndType;
 
         if (is_subclass_of($type, Model::class)) {
             return $type::find($value);
