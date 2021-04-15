@@ -1,3 +1,6 @@
+**This package is a work in progress, do no use yet**
+
+
 # Add variables to the payloads of all jobs in a Laravel app
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel_interacts_with_payload.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel_interacts_with_payload)
