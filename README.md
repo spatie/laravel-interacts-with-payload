@@ -1,5 +1,3 @@
-**This package is a work in progress, do no use yet**
-
 # Add variables to the payloads of all jobs in a Laravel app
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-interacts-with-payload.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-interacts-with-payload)
@@ -36,6 +34,10 @@ class YourJob implements ShouldQueue
     }  
 }
 ```
+
+## Are you a visual learner?
+
+[In this livestream](https://youtu.be/DY8i5eaXCbM?t=1688), you'll see our developer Freek explains how you can use the package, it's internals and how we test this package.
 
 ## Support us
 
