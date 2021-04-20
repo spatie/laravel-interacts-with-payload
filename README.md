@@ -1,4 +1,4 @@
-# Add variables to the payloads of all jobs in a Laravel app
+# Inject extra info to the payloads of all jobs in a Laravel app
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-interacts-with-payload.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-interacts-with-payload)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spatie/laravel-interacts-with-payload/run-tests?label=tests)](https://github.com/spatie/laravel-interacts-with-payload/actions?query=workflow%3Arun-tests+branch%3Amaster)
