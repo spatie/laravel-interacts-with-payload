@@ -12,6 +12,8 @@ This package makes it easy to inject things in every job.
 Imagine that you want to have the user who initiated the queued of a job available in every queued job. This is how you would implement that using this package.
 
 ```php
+// typically in a service provider
+
 use Spatie\InteractsWithPayload\Facades\AllJobs;
 
 AllJobs::add('user', fn() => auth()->user());
