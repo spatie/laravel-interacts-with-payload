@@ -47,7 +47,7 @@ class AllJobs
     protected function getPreparedValueForPayload(string $name, mixed $rawValue): array
     {
         if ($rawValue instanceof Model) {
-            return ['value' => $rawValue->id, 'type' => get_class($rawValue)];
+            return ['value' => $rawValue->getKey(), 'type' => get_class($rawValue)];
         }
 
         return [
