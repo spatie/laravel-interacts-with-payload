@@ -107,9 +107,6 @@ class YourJob implements ShouldQueue
 }
 ```
 
-
-
-
 ## Testing
 
 ```bash
