@@ -48,7 +48,7 @@
     "extra": {
         "laravel": {
             "providers": [
-              "InteractsWithPayloadServiceProvider"
+              "Spatie\\InteractsWithPayload\\InteractsWithPayloadServiceProvider"
             ],
             "aliases": {
                 "AllJobs": "Spatie\\InteractsWithPayload\\Facades\\AllJobs"
