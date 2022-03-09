@@ -1,3 +1,6 @@
+
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
+
 # Inject extra info to the payloads of all jobs in a Laravel app
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-interacts-with-payload.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-interacts-with-payload)
