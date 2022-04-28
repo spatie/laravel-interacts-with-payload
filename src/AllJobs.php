@@ -27,7 +27,7 @@ class AllJobs
     public function addAllToPayloadData(array $payloadData): array
     {
         foreach ($this->addToPayload as $addToPayloadName => $addToPayloadClosure) {
-            if (isset($jobData[$addToPayloadName])) {
+            if (isset($payloadData[$addToPayloadName])) {
                 continue;
             }
 
