@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-interacts-with-payload` will be documented in this file.
 
+## 1.1.1 - 2022-04-29
+
+## What's Changed
+
+- Fix variable name by @joelvh in https://github.com/spatie/laravel-interacts-with-payload/pull/1
+
+## New Contributors
+
+- @joelvh made their first contribution in https://github.com/spatie/laravel-interacts-with-payload/pull/1
+
+**Full Changelog**: https://github.com/spatie/laravel-interacts-with-payload/compare/1.1.0...1.1.1
+
 ## 1.1.0 - 2022-01-13
 
 - support Laravel 9
