@@ -18,6 +18,7 @@ class InteractsWithPayloadServiceProvider extends PackageServiceProvider
         $this->app->singleton('all-jobs', function () {
             return new AllJobs();
         });
+        $this->app->alias('all-jobs', AllJobs::class);
     }
 
     public function packageBooted()
