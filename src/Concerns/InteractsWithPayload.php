@@ -3,9 +3,12 @@
 namespace Spatie\InteractsWithPayload\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Queue\InteractsWithQueue;
 
 trait InteractsWithPayload
 {
+    use InteractsWithQueue;
+
     public function getFromPayload(string $name): mixed
     {
         $payload = $this->job->payload();
