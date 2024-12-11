@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-interacts-with-payload` will be documented in this file.
 
+## 1.2.1 - 2024-12-11
+
+### What's Changed
+
+* Add alias for AllJobs by @demianbinsh in https://github.com/spatie/laravel-interacts-with-payload/pull/5
+* Use InteractsWithQueue by @demianbinsh in https://github.com/spatie/laravel-interacts-with-payload/pull/4
+
+### New Contributors
+
+* @demianbinsh made their first contribution in https://github.com/spatie/laravel-interacts-with-payload/pull/5
+
+**Full Changelog**: https://github.com/spatie/laravel-interacts-with-payload/compare/1.2.0...1.2.1
+
 ## 1.2.0 - 2024-03-08
 
 ### What's Changed
