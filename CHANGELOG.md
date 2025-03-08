@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-interacts-with-payload` will be documented in this file.
 
+## 1.2.2 - 2025-03-08
+
+### What's Changed
+
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-interacts-with-payload/pull/6
+
+**Full Changelog**: https://github.com/spatie/laravel-interacts-with-payload/compare/1.2.1...1.2.2
+
 ## 1.2.1 - 2024-12-11
 
 ### What's Changed
