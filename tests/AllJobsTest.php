@@ -2,6 +2,7 @@
 
 namespace Spatie\InteractsWithPayload\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Spatie\InteractsWithPayload\Facades\AllJobs;
 use Spatie\InteractsWithPayload\Tests\TestClasses\TestJob;
 use Spatie\InteractsWithPayload\Tests\TestClasses\TestModel;
@@ -10,7 +11,7 @@ class AllJobsTest extends TestCase
 {
     protected mixed $valueFromInsideJob = null;
 
-    /** @test */
+    #[Test]
     public function it_can_inject_a_value_in_all_jobs()
     {
         self::$executeInJob = function (TestJob $job) {
@@ -24,7 +25,7 @@ class AllJobsTest extends TestCase
         $this->assertEquals('extraValue', $this->valueFromInsideJob);
     }
 
-    /** @test */
+    #[Test]
     public function it_will_not_blow_up_when_no_value_has_been_set()
     {
         self::$executeInJob = function (TestJob $job) {
@@ -36,7 +37,7 @@ class AllJobsTest extends TestCase
         $this->assertNull($this->valueFromInsideJob);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_automatically_serialize_models()
     {
         $myModel = TestModel::create(['name' => 'my model name']);
@@ -53,7 +54,7 @@ class AllJobsTest extends TestCase
         $this->assertEquals('my model name', $this->valueFromInsideJob->name);
     }
 
-    /** @test */
+    #[Test]
     public function it_an_handle_an_array()
     {
         self::$executeInJob = function (TestJob $job) {
@@ -68,7 +69,7 @@ class AllJobsTest extends TestCase
         $this->assertEquals(1, $this->valueFromInsideJob['a']);
     }
 
-    /** @test */
+    #[Test]
     public function multiple_things_can_be_added_to_a_job_in_one_go()
     {
         $myModel = TestModel::create(['name' => 'my model name']);
