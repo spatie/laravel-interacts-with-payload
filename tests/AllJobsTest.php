@@ -3,6 +3,7 @@
 namespace Spatie\InteractsWithPayload\Tests;
 
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestWith;
 use Spatie\InteractsWithPayload\Facades\AllJobs;
 use Spatie\InteractsWithPayload\Tests\TestClasses\TestJob;
 use Spatie\InteractsWithPayload\Tests\TestClasses\TestModel;
@@ -12,17 +13,23 @@ class AllJobsTest extends TestCase
     protected mixed $valueFromInsideJob = null;
 
     #[Test]
-    public function it_can_inject_a_value_in_all_jobs()
+    #[TestWith(['extraValue'])]
+    #[TestWith([false])]
+    #[TestWith([0])]
+    #[TestWith([''])]
+    #[TestWith([null])]
+    #[TestWith([['nested' => ['value' => 42]]])]
+    public function it_can_inject_a_value_in_all_jobs(mixed $value): void
     {
         self::$executeInJob = function (TestJob $job) {
             $this->valueFromInsideJob = $job->getFromPayload('extra');
         };
 
-        AllJobs::add('extra', fn () => 'extraValue');
+        AllJobs::add('extra', fn () => $value);
 
         dispatch(new TestJob());
 
-        $this->assertEquals('extraValue', $this->valueFromInsideJob);
+        $this->assertSame($value, $this->valueFromInsideJob);
     }
 
     #[Test]

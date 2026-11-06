@@ -17,10 +17,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        php: ['8.2', '8.5', '8.6']
-        # Laravel 10 and 11 are blocked by Composer security advisories.
-        laravel: ['12.*']
-        stability: [prefer-stable]
+        php: ['8.3', '8.4', '8.5', '8.6']
+        laravel: ['13.*']
+        stability: [prefer-lowest, prefer-stable]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -32,7 +31,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          extensions: dom, curl, libxml, mbstring, zip, pdo, pdo_sqlite, bcmath, ctype, fileinfo, tokenizer, xml, xmlwriter
           coverage: none
 
       - name: Setup problem matchers
@@ -43,8 +42,11 @@ jobs:
       - name: Install dependencies
         shell: bash
         run: |
+          composer validate --strict
           composer require "laravel/framework:${{ matrix.laravel }}"  --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          composer update --${{ matrix.stability }} --prefer-stable --prefer-dist --no-interaction
+          composer check-platform-reqs
+          composer audit
           composer show --direct
 
       - name: Execute tests
